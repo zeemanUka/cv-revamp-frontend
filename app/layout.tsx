@@ -23,6 +23,7 @@ export default function RootLayout({
             <nav className="flex gap-4 text-sm">
               <Link href="/">Home</Link>
               <Link href="/upload">Upload CV</Link>
+              <Link href="/ats-check">ATS Check</Link>
             </nav>
           </div>
         </header>

@@ -51,8 +51,10 @@ export default function UploadPage() {
       const data = await res.json();
       const cvId = data.cv_id as number;
       router.push(`/cv/${cvId}`);
-    } catch (err: any) {
-      setError(err.message || "An unexpected error occurred.");
+    } catch (err: unknown) {
+      const message =
+        err instanceof Error ? err.message : "An unexpected error occurred.";
+      setError(message);
     } finally {
       setLoading(false);
     }
