@@ -21,19 +21,22 @@ export default function RootLayout({
             <Link href="/" className="text-lg font-semibold">
               CV Revamper
             </Link>
-            <nav className="flex items-center gap-4 text-sm text-slate-700 dark:text-slate-200">
-              <Link href="/" className="hover:text-slate-900 dark:hover:text-white">
+            <nav className="flex items-center gap-3 text-sm">
+              <Link
+                href="/"
+                className="inline-flex items-center rounded-full border border-slate-300 bg-white px-3 py-1.5 font-medium text-slate-700 shadow-sm transition hover:border-slate-400 hover:text-slate-900 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200"
+              >
                 Home
               </Link>
               <Link
                 href="/upload"
-                className="hover:text-slate-900 dark:hover:text-white"
+                className="inline-flex items-center rounded-full border border-slate-300 bg-white px-3 py-1.5 font-medium text-slate-700 shadow-sm transition hover:border-slate-400 hover:text-slate-900 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200"
               >
                 Upload CV
               </Link>
               <Link
                 href="/ats-check"
-                className="hover:text-slate-900 dark:hover:text-white"
+                className="inline-flex items-center rounded-full border border-slate-300 bg-white px-3 py-1.5 font-medium text-slate-700 shadow-sm transition hover:border-slate-400 hover:text-slate-900 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200"
               >
                 ATS Check
               </Link>
