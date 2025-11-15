@@ -62,11 +62,11 @@ export default function HomePage() {
             Local-first CV AI
           </p>
           <div className="space-y-4">
-            <h1 className="text-4xl font-semibold leading-tight text-slate-900 sm:text-5xl">
+            <h1 className="text-4xl font-semibold leading-tight text-slate-900 sm:text-5xl dark:text-slate-300">
               Tailor your CV to any job in minutes, without sending data to the
               cloud.
             </h1>
-            <p className="text-base text-slate-600">
+            <p className="text-base text-slate-600 dark:text-slate-300">
               Upload a job description, drop in your PDF CV, and generate a
               tailored version that mirrors the language, skills, and outcomes
               recruiters look for. No generic templates, just your voice
@@ -82,13 +82,13 @@ export default function HomePage() {
             </Link>
             <Link
               href="/cv"
-              className="inline-flex items-center rounded-full border border-slate-300 px-5 py-2.5 text-sm font-medium text-slate-700 transition-colors duration-200 hover:border-slate-500 hover:text-slate-900"
+              className="inline-flex items-center rounded-full border border-slate-300 px-5 py-2.5 text-sm font-medium text-slate-700 transition-colors duration-200 hover:border-slate-500 hover:text-slate-900 dark:hover:text-slate-300"
             >
               Browse drafts
             </Link>
           </div>
           <dl className="grid gap-6 sm:grid-cols-2">
-            <div className="rounded-2xl border border-slate-200 bg-white/70 p-5 shadow-sm transition-colors duration-200 hover:border-slate-300 hover:bg-white">
+            <div className="rounded-2xl border border-slate-200 bg-white/70 p-5 shadow-sm transition-colors duration-200 hover:border-slate-300 hover:bg-white dark:border-slate-800 dark:bg-slate-900/40 dark:hover:border-slate-700 dark:hover:bg-slate-900/70">
               <dt className="text-xs font-semibold uppercase tracking-wide text-slate-500">
                 Time saved per application
               </dt>
@@ -97,7 +97,7 @@ export default function HomePage() {
                 Average prep time compared to manual edits.
               </p>
             </div>
-            <div className="rounded-2xl border border-slate-200 bg-white/70 p-5 shadow-sm transition-colors duration-200 hover:border-slate-300 hover:bg-white">
+            <div className="rounded-2xl border border-slate-200 bg-white/70 p-5 shadow-sm transition-colors duration-200 hover:border-slate-300 hover:bg-white dark:border-slate-800 dark:bg-slate-900/40 dark:hover:border-slate-700 dark:hover:bg-slate-900/70">
               <dt className="text-xs font-semibold uppercase tracking-wide text-slate-500">
                 ATS-friendly rewrites
               </dt>
@@ -120,7 +120,7 @@ export default function HomePage() {
               CV Revamper keeps every token on-device. Swap between local models
               on the fly and see real-time diffs of what changed.
             </p>
-            <div className="space-y-2 rounded-2xl border border-white/10 bg-white/5 p-5">
+            <div className="space-y-2 rounded-2xl border border-white/10 bg-white/5 p-5 dark:bg-white/10">
               <p className="text-xs uppercase tracking-[0.3em] text-white/60">
                 Supported models
               </p>
@@ -163,10 +163,10 @@ export default function HomePage() {
           <p className="text-xs font-semibold uppercase tracking-[0.5em] text-slate-500">
             Why revamp
           </p>
-          <h2 className="text-3xl font-semibold text-slate-900">
+          <h2 className="text-3xl font-semibold text-slate-900 dark:text-slate-300">
             Purpose-built workflow for thoughtful applications
           </h2>
-          <p className="text-base text-slate-600">
+          <p className="text-base text-slate-600 dark:text-slate-300">
             Keep the context that matters while aligning every bullet point with
             what the hiring team actually asks for.
           </p>
@@ -175,15 +175,15 @@ export default function HomePage() {
           {features.map((feature) => (
             <div
               key={feature.title}
-              className="group flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-[0_12px_35px_-30px_rgba(15,23,42,0.8)] transition duration-200 hover:-translate-y-1 hover:border-slate-900/40 hover:bg-slate-50"
+              className="group flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-[0_12px_35px_-30px_rgba(15,23,42,0.8)] transition duration-200 hover:-translate-y-1 hover:border-slate-900/40 hover:bg-slate-50 dark:border-slate-800 dark:bg-slate-900/60 dark:hover:border-slate-700 dark:hover:bg-slate-900"
             >
-              <div className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400 transition-colors duration-200 group-hover:text-slate-600">
+              <div className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400 transition-colors duration-200 group-hover:text-slate-600 dark:text-slate-500 dark:group-hover:text-slate-300">
                 {feature.highlight}
               </div>
-              <h3 className="mt-4 text-lg font-semibold text-slate-900 transition-colors duration-200 group-hover:text-slate-950">
+              <h3 className="mt-4 text-lg font-semibold text-slate-900 transition-colors duration-200 group-hover:text-slate-950 dark:text-slate-300">
                 {feature.title}
               </h3>
-              <p className="mt-3 text-sm text-slate-600 transition-colors duration-200 group-hover:text-slate-700">
+              <p className="mt-3 text-sm text-slate-600 transition-colors duration-200 group-hover:text-slate-700 dark:text-slate-300">
                 {feature.body}
               </p>
             </div>
@@ -192,14 +192,14 @@ export default function HomePage() {
       </section>
 
       <section className="grid gap-8 lg:grid-cols-[0.9fr,1.1fr]">
-        <div className="rounded-3xl border border-slate-200 bg-slate-50 p-8">
+        <div className="rounded-3xl border border-slate-200 bg-slate-50 p-8 dark:border-slate-800 dark:bg-slate-900/50">
           <p className="text-xs font-semibold uppercase tracking-[0.5em] text-slate-500">
             Workflow
           </p>
-          <h2 className="mt-3 text-2xl font-semibold text-slate-900">
+          <h2 className="mt-3 text-2xl font-semibold text-slate-900 dark:text-slate-300">
             Keep your structure, update your story.
           </h2>
-          <p className="mt-3 text-sm text-slate-600">
+          <p className="mt-3 text-sm text-slate-600 dark:text-slate-300">
             Every revamp keeps your sections untouched, so ATS parsing stays
             perfect while the narrative focuses on measurable results.
           </p>
@@ -209,8 +209,8 @@ export default function HomePage() {
               return (
                 <article
                   key={step.title}
-                  className={`group rounded-2xl border border-slate-200 bg-white p-5 transition duration-200 hover:-translate-y-1 hover:border-slate-900/30 ${
-                    isActive ? "shadow-xl" : ""
+                className={`group rounded-2xl border border-slate-200 bg-white  p-5 transition duration-200 hover:-translate-y-1 hover:border-slate-900/30 dark:border-slate-800 dark:bg-slate-900/60 ${ 
+                    isActive ? "shadow-xl dark:shadow-slate-900/40" : ""
                   }`}
                   onMouseEnter={() => setActiveStep(index)}
                 >
@@ -219,7 +219,7 @@ export default function HomePage() {
                     className={`inline-flex h-10 w-10 items-center justify-center rounded-full text-sm font-semibold transition-colors duration-200 ${
                       isActive
                         ? "bg-slate-900 text-white shadow-lg shadow-slate-900/30"
-                        : "bg-white text-slate-500 ring-1 ring-slate-200 hover:bg-slate-900 hover:text-white"
+                        : "bg-white text-slate-500 ring-1 ring-slate-200 hover:bg-slate-900 hover:text-white dark:bg-slate-900 dark:text-slate-300 dark:ring-slate-700 dark:hover:bg-white dark:hover:text-slate-900"
                     }`}
                     onMouseEnter={() => setActiveStep(index)}
                     onFocus={() => setActiveStep(index)}
@@ -229,12 +229,14 @@ export default function HomePage() {
                   >
                     {index + 1}
                   </button>
-                  <h3 className="mt-3 text-lg font-semibold text-slate-900">
+                  <h3 className="mt-3 text-lg font-semibold text-slate-900 dark:text-slate-300">
                     {step.title}
                   </h3>
                   <p
                     className={`mt-2 text-sm transition-colors duration-200 ${
-                      isActive ? "text-slate-700" : "text-slate-600"
+                      isActive
+                        ? "text-slate-700 dark:text-slate-200"
+                        : "text-slate-600 dark:text-slate-400"
                     }`}
                   >
                     {step.description}
@@ -244,23 +246,23 @@ export default function HomePage() {
             })}
           </div>
         </div>
-        <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-xl">
+        <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-xl dark:border-slate-800 dark:bg-slate-900/80">
           <div className="space-y-5">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.4em] text-slate-500">
                 What changes
               </p>
-              <h3 className="mt-2 text-2xl font-semibold text-slate-900">
+              <h3 className="mt-2 text-2xl font-semibold text-slate-900 dark:text-slate-300">
                 Summary &amp; Experience
               </h3>
-              <p className="mt-2 text-sm text-slate-600">
+              <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
                 Step {activeStep + 1}: {activeChange.changeTitle}
               </p>
               <p className="mt-1 text-sm text-slate-500">
                 {activeChange.changeDescription}
               </p>
             </div>
-            <div className="rounded-2xl bg-slate-50 p-5 text-sm text-slate-700">
+            <div className="rounded-2xl bg-slate-50 p-5 text-sm text-slate-700 dark:bg-slate-900/40 dark:text-slate-200">
               <p className="text-xs uppercase tracking-[0.3em] text-slate-400">
                 Before
               </p>
@@ -276,14 +278,14 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="rounded-3xl border border-slate-200 bg-gradient-to-br from-white via-slate-50 to-slate-100 p-10 text-center shadow-[0_30px_80px_-45px_rgba(15,23,42,0.9)]">
+      <section className="rounded-3xl border border-slate-200 bg-gradient-to-br from-white via-slate-50 to-slate-100 p-10 text-center shadow-[0_30px_80px_-45px_rgba(15,23,42,0.9)] dark:border-slate-800 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900">
         <p className="text-xs font-semibold uppercase tracking-[0.5em] text-slate-500">
           Ready when you are
         </p>
-        <h2 className="mt-4 text-3xl font-semibold text-slate-900">
+        <h2 className="mt-4 text-3xl font-semibold text-slate-900 dark:text-slate-300">
           Upload your next application and let CV Revamper do the heavy lifting.
         </h2>
-        <p className="mt-3 text-base text-slate-600">
+        <p className="mt-3 text-base text-slate-600 dark:text-slate-300">
           Create your first tailored CV in under five minutes—no subscriptions,
           no endless forms, just a focused workflow that keeps your voice.
         </p>
@@ -296,7 +298,7 @@ export default function HomePage() {
           </Link>
           <Link
             href="/upload"
-            className="inline-flex items-center rounded-full border border-slate-300 px-6 py-3 text-sm font-medium text-slate-700 transition-colors duration-200 hover:border-slate-500 hover:bg-white"
+            className="inline-flex items-center rounded-full border border-slate-300 px-6 py-3 text-sm font-medium text-slate-700 transition-colors duration-200 hover:border-slate-500 hover:bg-white dark:border-slate-700 dark:text-slate-200 dark:hover:border-slate-500 dark:hover:bg-slate-900/60"
           >
             See how it works
           </Link>

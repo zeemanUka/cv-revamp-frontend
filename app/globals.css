@@ -44,3 +44,8 @@ a {
     color-scheme: dark;
   }
 }
+
+/* Hide the default Next.js dev overlay icon */
+.nextjs-portal {
+  display: none !important;
+}
