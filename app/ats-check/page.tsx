@@ -1,6 +1,12 @@
 "use client";
 
-import { FormEvent, useCallback, useMemo, useState } from "react";
+import {
+  FormEvent,
+  useCallback,
+  useMemo,
+  useState,
+  type ReactNode,
+} from "react";
 import { API_BASE_URL } from "../../lib/api";
 
 type CVDetail = {
@@ -38,6 +44,30 @@ type ATSAnalysisResponse = {
 };
 
 const models = ["llama3.2", "deepseek-r1:8b", "gemma3:27b"];
+
+const isRecord = (value: unknown): value is Record<string, unknown> =>
+  typeof value === "object" && value !== null && !Array.isArray(value);
+
+const toTitleCase = (value: string) =>
+  value
+    .split("_")
+    .map((word) =>
+      word.length > 0 ? word[0].toUpperCase() + word.slice(1) : word
+    )
+    .join(" ");
+
+const formatAnalysisValue = (value: unknown) => {
+  if (Array.isArray(value)) {
+    return value.join(", ");
+  }
+  if (isRecord(value)) {
+    return JSON.stringify(value, null, 2);
+  }
+  if (value === null || value === undefined) {
+    return "—";
+  }
+  return String(value);
+};
 
 export default function ATSCheckPage() {
   const [cvTitle, setCvTitle] = useState("My CV");
@@ -87,6 +117,21 @@ export default function ATSCheckPage() {
       );
     }
     return [];
+  }, [result]);
+  const additionalEntries = useMemo(() => {
+    if (!result) return [];
+    const consumed = new Set([
+      "match_score",
+      "overall_score",
+      "summary",
+      "matched_keywords",
+      "missing_keywords",
+      "recommendations",
+      "strengths",
+      "risks",
+      "keyword_breakdown",
+    ]);
+    return Object.entries(result).filter(([key]) => !consumed.has(key));
   }, [result]);
 
   const fetchCvDetail = useCallback(async (cvId: number) => {
@@ -221,34 +266,34 @@ export default function ATSCheckPage() {
         <p className="text-xs font-semibold uppercase tracking-[0.5em] text-slate-500">
           ATS checker
         </p>
-        <h1 className="text-3xl font-semibold text-slate-900">
+        <h1 className="text-3xl font-semibold text-slate-900 dark:text-slate-300">
           Upload a CV, then run the ATS pass immediately
         </h1>
-        <p className="text-sm text-slate-600">
+        <p className="text-sm text-slate-600 dark:text-slate-300">
           Follow the same upload flow you&apos;re used to—job details plus a PDF
           upload—then get an instant ATS score without copying IDs around.
         </p>
       </header>
 
-      <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+      <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900/70">
         <form className="space-y-4" onSubmit={handleSubmit}>
           <div className="grid gap-4 md:grid-cols-2">
             <div>
-              <label className="block text-sm font-medium text-slate-800">
+              <label className="block text-sm font-medium text-slate-800 dark:text-slate-200">
                 CV title
               </label>
               <input
                 value={cvTitle}
                 onChange={(event) => setCvTitle(event.target.value)}
-                className="mt-1 w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 focus:border-slate-900/40 focus:outline-none focus:ring-2 focus:ring-slate-900/15"
+                className="mt-1 w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 focus:border-slate-900/40 focus:outline-none focus:ring-2 focus:ring-slate-900/15 dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-100"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-slate-800">
+              <label className="block text-sm font-medium text-slate-800 dark:text-slate-200">
                 Model
               </label>
               <select
-                className="mt-1 w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 focus:border-slate-900/40 focus:outline-none focus:ring-2 focus:ring-slate-900/15"
+                className="mt-1 w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 focus:border-slate-900/40 focus:outline-none focus:ring-2 focus:ring-slate-900/15 dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-100"
                 value={model}
                 onChange={(event) => setModel(event.target.value)}
               >
@@ -263,18 +308,18 @@ export default function ATSCheckPage() {
 
           <div className="grid gap-4 md:grid-cols-2">
             <div>
-              <label className="block text-sm font-medium text-slate-800">
+              <label className="block text-sm font-medium text-slate-800 dark:text-slate-200">
                 Job title
               </label>
               <input
                 value={jobTitle}
                 onChange={(event) => setJobTitle(event.target.value)}
                 placeholder="Senior Backend Engineer"
-                className="mt-1 w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 focus:border-slate-900/40 focus:outline-none focus:ring-2 focus:ring-slate-900/15"
+                className="mt-1 w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 focus:border-slate-900/40 focus:outline-none focus:ring-2 focus:ring-slate-900/15 dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-100"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-slate-800">
+              <label className="block text-sm font-medium text-slate-800 dark:text-slate-200">
                 CV PDF file
               </label>
               <input
@@ -284,24 +329,24 @@ export default function ATSCheckPage() {
                   const selected = event.target.files?.[0] || null;
                   setFile(selected);
                 }}
-                className="mt-1 block w-full cursor-pointer rounded-md border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 focus:border-slate-900/40 focus:outline-none focus:ring-2 focus:ring-slate-900/15 file:mr-4 file:rounded-md file:border-0 file:bg-slate-900 file:px-3 file:py-1.5 file:text-sm file:font-medium file:text-white"
+                className="mt-1 block w-full cursor-pointer rounded-md border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 focus:border-slate-900/40 focus:outline-none focus:ring-2 focus:ring-slate-900/15 dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-100 dark:file:bg-slate-100 dark:file:text-slate-900 file:mr-4 file:rounded-md file:border-0 file:bg-slate-900 file:px-3 file:py-1.5 file:text-sm file:font-medium file:text-white"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-800">
+            <label className="block text-sm font-medium text-slate-800 dark:text-slate-200">
               Job description
             </label>
             <textarea
               value={jobDescription}
               onChange={(event) => setJobDescription(event.target.value)}
               placeholder="Paste the job description here..."
-              className="mt-1 min-h-[12rem] w-full resize-y rounded-md border border-slate-200 bg-white px-3 py-2 text-sm leading-relaxed text-slate-900 placeholder:text-slate-400 focus:border-slate-900/40 focus:outline-none focus:ring-2 focus:ring-slate-900/15"
+              className="mt-1 min-h-[12rem] w-full resize-y rounded-md border border-slate-200 bg-white px-3 py-2 text-sm leading-relaxed text-slate-900 placeholder:text-slate-400 focus:border-slate-900/40 focus:outline-none focus:ring-2 focus:ring-slate-900/15 dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-100 dark:placeholder:text-slate-500"
             />
           </div>
 
-          {formError && <p className="text-sm text-red-600">{formError}</p>}
+          {formError && <p className="text-sm text-red-500">{formError}</p>}
 
           <button
             type="submit"
@@ -314,7 +359,7 @@ export default function ATSCheckPage() {
       </section>
 
       {detail && (
-        <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm space-y-3">
+        <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm space-y-3 dark:border-slate-800 dark:bg-slate-900/70">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.4em] text-slate-500">
@@ -328,7 +373,7 @@ export default function ATSCheckPage() {
                   {detail.cv.job_title}
                 </p>
               )}
-              <p className="mt-2 text-xs text-slate-500">
+              <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
                 Using job requirement #{jobRequirementId}. Re-run with another
                 model without re-uploading.
               </p>
@@ -342,13 +387,11 @@ export default function ATSCheckPage() {
               Re-run ATS check
             </button>
           </div>
-          {analysisError && (
-            <p className="text-sm text-red-600">{analysisError}</p>
-          )}
+          {analysisError && <p className="text-sm text-red-500">{analysisError}</p>}
         </section>
       )}
 
-      <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+      <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900/70">
         {result ? (
           <div className="space-y-4">
             <div className="flex flex-wrap gap-6">
@@ -363,7 +406,7 @@ export default function ATSCheckPage() {
                 </div>
               )}
               {result.summary && (
-                <div className="max-w-xl text-sm text-slate-700">
+                <div className="max-w-xl text-sm text-slate-700 dark:text-slate-300">
                   {result.summary}
                 </div>
               )}
@@ -396,7 +439,7 @@ export default function ATSCheckPage() {
                   {missingKeywords.map((keyword) => (
                     <span
                       key={keyword}
-                      className="rounded-full bg-red-50 px-2.5 py-1 text-red-700"
+                      className="rounded-full bg-red-50 px-2.5 py-1 text-red-700 dark:bg-slate-900/40 dark:text-red-300"
                     >
                       {keyword}
                     </span>
@@ -410,7 +453,7 @@ export default function ATSCheckPage() {
                 {keywordBreakdownEntries.map(([keyword, value]) => (
                   <div
                     key={keyword}
-                    className="rounded-xl border border-slate-100 bg-slate-50 p-3"
+                    className="rounded-xl border border-slate-100 bg-slate-50 p-3 dark:border-slate-700 dark:bg-slate-900/60"
                   >
                     <p className="text-xs uppercase tracking-wide text-slate-500">
                       {keyword}
@@ -429,7 +472,7 @@ export default function ATSCheckPage() {
             (recommendations && recommendations.length > 0) ? (
               <div className="grid gap-3 md:grid-cols-3">
                 {strengths && strengths.length > 0 && (
-                  <div className="rounded-xl border border-emerald-100 bg-emerald-50/70 p-3">
+                  <div className="rounded-xl border border-emerald-100 bg-emerald-50/70 p-3 dark:border-emerald-400/30 dark:bg-emerald-950/40">
                     <p className="text-xs font-semibold uppercase tracking-wide text-emerald-800">
                       Strengths
                     </p>
@@ -441,7 +484,7 @@ export default function ATSCheckPage() {
                   </div>
                 )}
                 {risks && risks.length > 0 && (
-                  <div className="rounded-xl border border-amber-100 bg-amber-50/80 p-3">
+                  <div className="rounded-xl border border-amber-100 bg-amber-50/80 p-3 dark:border-amber-300/30 dark:bg-amber-950/20">
                     <p className="text-xs font-semibold uppercase tracking-wide text-amber-800">
                       Risks
                     </p>
@@ -453,7 +496,7 @@ export default function ATSCheckPage() {
                   </div>
                 )}
                 {recommendations && recommendations.length > 0 && (
-                  <div className="rounded-xl border border-slate-200 bg-white p-3 md:col-span-1 md:row-span-2">
+                  <div className="rounded-xl border border-slate-200 bg-white p-3 md:col-span-1 md:row-span-2 dark:border-slate-700 dark:bg-slate-900/60">
                     <p className="text-xs font-semibold uppercase tracking-wide text-slate-700">
                       Recommendations
                     </p>
@@ -467,17 +510,65 @@ export default function ATSCheckPage() {
               </div>
             ) : null}
 
-            <details className="rounded-xl border border-slate-200 bg-slate-50 p-3 text-xs text-slate-700">
-              <summary className="cursor-pointer text-sm font-medium text-slate-900">
-                Raw response
-              </summary>
-              <pre className="mt-2 whitespace-pre-wrap break-words text-[11px] leading-relaxed">
-                {JSON.stringify(result, null, 2)}
-              </pre>
-            </details>
+            {additionalEntries.length > 0 && (
+              <div className="space-y-4 rounded-xl border border-slate-200 bg-slate-50 p-4 dark:border-slate-700 dark:bg-slate-900/70">
+                <p className="text-xs font-semibold uppercase tracking-wide text-slate-700 dark:text-slate-200">
+                  Additional signals
+                </p>
+                <div className="grid gap-3 sm:grid-cols-2">
+                  {additionalEntries.map(([key, value]) => {
+                    const label = toTitleCase(key);
+                    let content: ReactNode;
+
+                    if (Array.isArray(value)) {
+                      content = (
+                        <ul className="mt-2 list-disc space-y-1 pl-4 text-xs text-slate-700 dark:text-slate-300">
+                          {value.map((item, index) => (
+                            <li key={`${key}-${index}`}>{String(item)}</li>
+                          ))}
+                        </ul>
+                      );
+                    } else if (isRecord(value)) {
+                      content = (
+                        <div className="mt-2 space-y-1 text-xs text-slate-700 dark:text-slate-300">
+                          {Object.entries(value).map(
+                            ([innerKey, innerValue]) => (
+                              <p key={innerKey}>
+                                <span className="font-semibold">
+                                  {toTitleCase(innerKey)}:
+                                </span>{" "}
+                                {String(innerValue)}
+                              </p>
+                            )
+                          )}
+                        </div>
+                      );
+                    } else {
+                      content = (
+                        <p className="mt-2 text-sm text-slate-800 dark:text-slate-200">
+                          {formatAnalysisValue(value)}
+                        </p>
+                      );
+                    }
+
+                    return (
+                      <article
+                        key={key}
+                        className="rounded-lg border border-white bg-white p-3 dark:border-slate-700 dark:bg-slate-900/60"
+                      >
+                        <h3 className="text-sm font-semibold text-slate-900 dark:text-slate-100">
+                          {label}
+                        </h3>
+                        {content}
+                      </article>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
           </div>
         ) : (
-          <div className="space-y-2 text-sm text-slate-600">
+          <div className="space-y-2 text-sm text-slate-600 dark:text-slate-400">
             <p>No ATS report yet.</p>
             <p>
               Upload a CV above, then we&apos;ll automatically score it against
