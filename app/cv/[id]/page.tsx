@@ -376,10 +376,6 @@ export default function CvDetailPage() {
             {tailorLoading ? "Generating..." : "Generate tailored CV"}
           </button>
         </div>
-        <p className="text-xs text-slate-500 dark:text-slate-400">
-          Make sure your local model server is running and accessible at{" "}
-          {process.env.NEXT_PUBLIC_API_BASE_URL || "http://127.0.0.1:8000/api"}.
-        </p>
       </section>
 
       <section className="rounded-md border border-slate-200 bg-white p-4 shadow-sm space-y-3 dark:border-slate-800 dark:bg-slate-900/70">

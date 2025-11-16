@@ -82,7 +82,7 @@ export default function HomePage() {
             </Link>
             <Link
               href="/cv"
-              className="inline-flex items-center rounded-full border border-slate-300 px-5 py-2.5 text-sm font-medium text-slate-700 transition-colors duration-200 hover:border-slate-500 hover:text-slate-900 dark:hover:text-slate-300"
+              className="inline-flex items-center rounded-full border border-slate-300 px-5 py-2.5 text-sm font-medium text-slate-700 dark:text-slate-400 transition-colors duration-200 hover:border-slate-500 hover:text-slate-900 dark:hover:text-slate-300"
             >
               Browse drafts
             </Link>
@@ -92,7 +92,7 @@ export default function HomePage() {
               <dt className="text-xs font-semibold uppercase tracking-wide text-slate-500">
                 Time saved per application
               </dt>
-              <dd className="mt-2 text-3xl font-semibold text-slate-900">45m</dd>
+              <dd className="mt-2 text-3xl font-semibold text-slate-900 dark:text-slate-400">45m</dd>
               <p className="mt-1 text-sm text-slate-500">
                 Average prep time compared to manual edits.
               </p>
@@ -101,7 +101,7 @@ export default function HomePage() {
               <dt className="text-xs font-semibold uppercase tracking-wide text-slate-500">
                 ATS-friendly rewrites
               </dt>
-              <dd className="mt-2 text-3xl font-semibold text-slate-900">100%</dd>
+              <dd className="mt-2 text-3xl font-semibold text-slate-900 dark:text-slate-400">100%</dd>
               <p className="mt-1 text-sm text-slate-500">
                 We never alter your structure—only the story.
               </p>
@@ -180,7 +180,7 @@ export default function HomePage() {
               <div className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400 transition-colors duration-200 group-hover:text-slate-600 dark:text-slate-500 dark:group-hover:text-slate-300">
                 {feature.highlight}
               </div>
-              <h3 className="mt-4 text-lg font-semibold text-slate-900 transition-colors duration-200 group-hover:text-slate-950 dark:text-slate-300">
+              <h3 className="mt-4 text-lg font-semibold text-slate-900 transition-colors duration-200 group-hover:text-slate-950 dark:text-slate-300 dark:hover:text-slate-200">
                 {feature.title}
               </h3>
               <p className="mt-3 text-sm text-slate-600 transition-colors duration-200 group-hover:text-slate-700 dark:text-slate-300">
