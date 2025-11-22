@@ -108,7 +108,6 @@ export default function HomePage() {
             </div>
           </dl>
         </div>
-
         <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-8 text-white shadow-2xl">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.18),_transparent_45%)]" />
           <div className="relative space-y-6">
