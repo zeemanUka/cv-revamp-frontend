@@ -7,6 +7,7 @@ import ThemeToggle from "./theme-toggle";
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/upload", label: "Upload CV" },
+  { href: "/cv", label: "Browse Drafts" },
   { href: "/ats-check", label: "ATS Check" },
 ];
 

@@ -2,17 +2,18 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { MODEL_OPTIONS } from "../lib/models";
 
 const features = [
   {
     title: "Upload your CV",
-    body: "Paste a job description, upload your PDF CV, and we keep it safe in a local SQLite database. Your files never leave your machine.",
-    highlight: "Private & encrypted storage",
+    body: "Paste a job description, upload your PDF CV, and keep your source files in your own backend storage before generating tailored drafts.",
+    highlight: "Private source storage",
   },
   {
-    title: "Revamp with local models",
-    body: "Run top local-first models like llama 3.2, deepseek-r1:8b, and gemma3:27b to rewrite your experience so it mirrors the role.",
-    highlight: "Bring your own models",
+    title: "Revamp with supported models",
+    body: "Switch between local models and Gemini (gemini-1.5-flash) to rewrite your experience so it mirrors the role.",
+    highlight: "Local + Gemini",
   },
   {
     title: "View, edit, and download",
@@ -48,7 +49,7 @@ const steps = [
   },
 ];
 
-const models = ["llama 3.2", "deepseek-r1:8b", "gemma3:27b", "Phi-4"];
+const models = MODEL_OPTIONS.map((model) => model.label);
 
 export default function HomePage() {
   const [activeStep, setActiveStep] = useState(0);
@@ -59,18 +60,17 @@ export default function HomePage() {
       <section className="grid gap-12 lg:grid-cols-[1.1fr,0.9fr]">
         <div className="space-y-6">
           <p className="text-sm font-semibold uppercase tracking-[0.4em] text-slate-500">
-            Local-first CV AI
+            CV AI workflow
           </p>
           <div className="space-y-4">
             <h1 className="text-4xl font-semibold leading-tight text-slate-900 sm:text-5xl dark:text-slate-300">
-              Tailor your CV to any job in minutes, without sending data to the
-              cloud.
+              Tailor your CV to any job in minutes with local or Gemini models.
             </h1>
             <p className="text-base text-slate-600 dark:text-slate-300">
               Upload a job description, drop in your PDF CV, and generate a
               tailored version that mirrors the language, skills, and outcomes
-              recruiters look for. No generic templates, just your voice
-              sharpened for the role.
+              recruiters look for. Pick the model route that fits each role, then
+              refine the final draft in your own voice.
             </p>
           </div>
           <div className="flex flex-wrap gap-3">
@@ -113,11 +113,12 @@ export default function HomePage() {
           <div className="relative space-y-6">
             <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1 text-xs font-semibold uppercase tracking-wide text-white/80">
               <span className="h-2 w-2 rounded-full bg-emerald-400" />
-              Running locally
+              Model routing
             </div>
             <p className="text-sm text-slate-200">
-              CV Revamper keeps every token on-device. Swap between local models
-              on the fly and see real-time diffs of what changed.
+              Run local models for on-device control, or use Gemini 1.5 Flash for
+              cloud inference. Swap models on the fly and compare diffs in one
+              place.
             </p>
             <div className="space-y-2 rounded-2xl border border-white/10 bg-white/5 p-5 dark:bg-white/10">
               <p className="text-xs uppercase tracking-[0.3em] text-white/60">

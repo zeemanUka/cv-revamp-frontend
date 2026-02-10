@@ -9,6 +9,7 @@ import {
 } from "react";
 import { useParams } from "next/navigation";
 import { API_BASE_URL } from "../../../lib/api";
+import { DEFAULT_MODEL, MODEL_OPTIONS } from "../../../lib/models";
 
 type TailoredSummary = {
   id: number;
@@ -104,7 +105,7 @@ export default function CvDetailPage() {
   const [tailorLoading, setTailorLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const [selectedModel, setSelectedModel] = useState<string>("llama3.2");
+  const [selectedModel, setSelectedModel] = useState<string>(DEFAULT_MODEL);
   const [selectedTailored, setSelectedTailored] = useState<TailoredFull | null>(
     null
   );
@@ -310,7 +311,7 @@ export default function CvDetailPage() {
         <h1 className="text-2xl font-semibold">{cv.title}</h1>
         <p className="text-sm text-slate-700 dark:text-slate-300">
           CV ID {cv.id}. You can view the original PDF, inspect the extracted text,
-          and generate tailored versions using your local models.
+          and generate tailored versions using your configured models.
         </p>
       </section>
 
@@ -351,7 +352,7 @@ export default function CvDetailPage() {
       <section className="rounded-md border border-slate-200 bg-white p-4 shadow-sm space-y-3 dark:border-slate-800 dark:bg-slate-900/70">
         <h2 className="text-base font-semibold">Generate tailored CV</h2>
         <p className="text-sm text-slate-700 dark:text-slate-300">
-          Choose a local model to use for rewriting your CV text to match the
+          Choose a model to use for rewriting your CV text to match the
           job description.
         </p>
         <div className="flex flex-wrap items-center gap-3 text-sm">
@@ -362,9 +363,11 @@ export default function CvDetailPage() {
               onChange={(e) => setSelectedModel(e.target.value)}
               className="rounded-md border px-2 py-1 text-sm"
             >
-              <option value="llama3.2">llama 3.2</option>
-              <option value="deepseek-r1:8b">deepseek-r1:8b</option>
-              <option value="gemma3:27b">gemma3:27b</option>
+              {MODEL_OPTIONS.map((modelOption) => (
+                <option key={modelOption.value} value={modelOption.value}>
+                  {modelOption.label}
+                </option>
+              ))}
             </select>
           </label>
           <button
@@ -383,7 +386,7 @@ export default function CvDetailPage() {
           <div>
             <h2 className="text-base font-semibold">ATS analysis</h2>
             <p className="text-sm text-slate-600">
-              Run an on-device ATS pass to see how well this CV aligns with the
+              Run an ATS pass to see how well this CV aligns with the
               job description keywords.
             </p>
           </div>

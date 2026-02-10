@@ -8,6 +8,7 @@ import {
   type ReactNode,
 } from "react";
 import { API_BASE_URL } from "../../lib/api";
+import { DEFAULT_MODEL, MODEL_OPTIONS } from "../../lib/models";
 
 type CVDetail = {
   id: number;
@@ -43,8 +44,6 @@ type ATSAnalysisResponse = {
   [key: string]: unknown;
 };
 
-const models = ["llama3.2", "deepseek-r1:8b", "gemma3:27b"];
-
 const isRecord = (value: unknown): value is Record<string, unknown> =>
   typeof value === "object" && value !== null && !Array.isArray(value);
 
@@ -74,7 +73,7 @@ export default function ATSCheckPage() {
   const [jobTitle, setJobTitle] = useState("");
   const [jobDescription, setJobDescription] = useState("");
   const [file, setFile] = useState<File | null>(null);
-  const [model, setModel] = useState(models[0]);
+  const [model, setModel] = useState(DEFAULT_MODEL);
   const [uploading, setUploading] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
 
@@ -297,9 +296,9 @@ export default function ATSCheckPage() {
                 value={model}
                 onChange={(event) => setModel(event.target.value)}
               >
-                {models.map((modelOption) => (
-                  <option key={modelOption} value={modelOption}>
-                    {modelOption}
+                {MODEL_OPTIONS.map((modelOption) => (
+                  <option key={modelOption.value} value={modelOption.value}>
+                    {modelOption.label}
                   </option>
                 ))}
               </select>
