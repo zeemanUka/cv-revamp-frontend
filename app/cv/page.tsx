@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { API_BASE_URL } from "../../lib/api";
+import { API_BASE_URL, FILE_BASE_URL } from "../../lib/api";
 
 type TaskItem = {
   task_type: string;
@@ -55,12 +55,9 @@ type CVOption = {
   task_count: number;
 };
 
-const fileBaseUrl =
-  process.env.NEXT_PUBLIC_FILE_BASE_URL ||
-  API_BASE_URL.replace(/\/api\/?$/, "");
-const normalizedFileBase = fileBaseUrl.endsWith("/")
-  ? fileBaseUrl
-  : `${fileBaseUrl}/`;
+const normalizedFileBase = FILE_BASE_URL.endsWith("/")
+  ? FILE_BASE_URL
+  : `${FILE_BASE_URL}/`;
 
 const resolvePdfUrl = (url: string | null) => {
   if (!url) return null;

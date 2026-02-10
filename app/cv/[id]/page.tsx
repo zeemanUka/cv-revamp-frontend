@@ -8,7 +8,7 @@ import {
   type ReactNode,
 } from "react";
 import { useParams } from "next/navigation";
-import { API_BASE_URL } from "../../../lib/api";
+import { API_BASE_URL, FILE_BASE_URL } from "../../../lib/api";
 import { DEFAULT_MODEL, MODEL_OPTIONS } from "../../../lib/models";
 
 type TailoredSummary = {
@@ -57,12 +57,9 @@ type ATSAnalysisResponse = {
   [key: string]: unknown;
 };
 
-const fileBaseUrl =
-  process.env.NEXT_PUBLIC_FILE_BASE_URL ||
-  API_BASE_URL.replace(/\/api\/?$/, "");
-const normalizedFileBase = fileBaseUrl.endsWith("/")
-  ? fileBaseUrl
-  : `${fileBaseUrl}/`;
+const normalizedFileBase = FILE_BASE_URL.endsWith("/")
+  ? FILE_BASE_URL
+  : `${FILE_BASE_URL}/`;
 
 const resolvePdfUrl = (url: string) => {
   try {

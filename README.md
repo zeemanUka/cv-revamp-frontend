@@ -2,6 +2,28 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
+1. Configure environment variables:
+
+```bash
+cp .env.example .env
+```
+
+Set `NEXT_PUBLIC_BACKEND_URL` in `.env` to your backend host (without `/api`).
+
+2. Run the development server:
+
+```bash
+npm run dev
+```
+
+3. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+The frontend builds API and file URLs from `.env`:
+- API base: `${NEXT_PUBLIC_BACKEND_URL}/api`
+- File base: `${NEXT_PUBLIC_BACKEND_URL}`
+
+## Default Next.js Notes
+
 First, run the development server:
 
 ```bash
